@@ -1,5 +1,5 @@
 const css_hidden = ".post-header.fixed {visibility: hidden}";
-const target = "*://imgur.com/a/*"
+const target = "*://imgur.com/*"
 
 /*
 Inserts css to the appropriate tab to hide the post header.

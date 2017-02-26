@@ -1,10 +1,10 @@
 {
-  "description": "Hides the post header on imgur albums when scrolling.",
+  "description": "Hides the post header on imgur pictures and albums when scrolling.",
   "manifest_version": 2,
   "name": "modify-imgur-album",
   "version": "1.0",
 
-  "permissions": ["*://imgur.com/a/*", "tabs", "webRequest"],
+  "permissions": ["*://imgur.com/*", "tabs", "webRequest"],
 
   "background": {
     "scripts": ["hide-post-header.js"]
