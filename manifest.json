@@ -1,0 +1,18 @@
+{
+  "description": "Adds a page action to unfix the header on imgur albums.",
+  "manifest_version": 2,
+  "name": "modify-imgur-album",
+  "version": "1.0",
+
+  "permissions": ["activeTab", "tabs"],
+
+  "background": {
+    "scripts": ["unfix-next-post.js"]
+  },
+
+  "page_action": {
+    "default_icon": "icons/off.svg",
+    "browser_style": true
+  }
+
+}
