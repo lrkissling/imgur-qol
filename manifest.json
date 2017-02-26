@@ -1,18 +1,13 @@
 {
-  "description": "Adds a page action to unfix the header on imgur albums.",
+  "description": "Hides the post header on imgur albums when scrolling.",
   "manifest_version": 2,
   "name": "modify-imgur-album",
   "version": "1.0",
 
-  "permissions": ["activeTab", "tabs", "webRequest"],
+  "permissions": ["*://imgur.com/a/*", "tabs", "webRequest"],
 
   "background": {
     "scripts": ["hide-post-header.js"]
-  },
-
-  "page_action": {
-    "default_icon": "icons/off.svg",
-    "browser_style": true
   }
 
 }
