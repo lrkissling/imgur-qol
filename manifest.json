@@ -4,7 +4,7 @@
   "name": "modify-imgur-album",
   "version": "1.0",
 
-  "permissions": ["activeTab", "tabs"],
+  "permissions": ["activeTab", "tabs", "webRequest"],
 
   "background": {
     "scripts": ["unfix-next-post.js"]

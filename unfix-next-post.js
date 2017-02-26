@@ -1,20 +1,20 @@
 const css_hidden = ".post-header.fixed {visibility: hidden}";
 const css_visible = ".post-header.fixed {visibility: visible}";
-const TITLE_UNFIXED = "Unfixed";
-const TITLE_FIXED = "Fixed";
-const APPLICABLE_PROTOCOLS = ["http:", "https:"];
+const TITLE_HIDDEN = "Hidden";
+const TITLE_VISIBLE = "Visible";
+const target = "*://imgur.com/a/*"
 
 function toggleCSS(tab) {
 
   function gotTitle(title) {
-      if (title === TITLE_UNFIXED) {
+      if (title === TITLE_HIDDEN) {
         browser.pageAction.setIcon({tabId: tab.id, path: "icons/on.svg"});
-        browser.pageAction.setTitle({tabId: tab.id, title: TITLE_FIXED});
+        browser.pageAction.setTitle({tabId: tab.id, title: TITLE_VISIBLE});
         browser.tabs.removeCSS({code: css_visible});
         browser.tabs.insertCSS({code: css_hidden});
       } else {
         browser.pageAction.setIcon({tabId: tab.id, path: "icons/off.svg"});
-        browser.pageAction.setTitle({tabId: tab.id, title: TITLE_UNFIXED});
+        browser.pageAction.setTitle({tabId: tab.id, title: TITLE_HIDDEN});
         browser.tabs.removeCSS({code: css_hidden});
         browser.tabs.insertCSS({code: css_visible});
       }
@@ -24,44 +24,24 @@ function toggleCSS(tab) {
   gettingTitle.then(gotTitle);
 }
 
-/*
-Returns true only if the URL's protocol is in APPLICABLE_PROTOCOLS.
-*/
-function protocolIsApplicable(url) {
-  var anchor =  document.createElement('a');
-  anchor.href = url;
-  return APPLICABLE_PROTOCOLS.includes(anchor.protocol);
-}
 
 /*
 Initialize the page action: set icon and title, then show.
-Only operates on tabs whose URL's protocol is applicable.
 */
-function initializePageAction(tab) {
-  // if (APPLICABLE_URI.match(url)) {
-  if (protocolIsApplicable(tab.url)) {
-    browser.pageAction.setIcon({tabId: tab.id, path: "icons/off.svg"});
-    browser.pageAction.setTitle({tabId: tab.id, title: TITLE_UNFIXED});
-    browser.pageAction.show(tab.id);
-  }
+function initializePageAction(responseDetails) {
+    browser.pageAction.setIcon({tabId: responseDetails.tabId, path: "icons/off.svg"});
+    browser.pageAction.setTitle({tabId: responseDetails.tabId, title: TITLE_HIDDEN});
+    browser.pageAction.show(responseDetails.tabId);
 }
 
 /*
-When first loaded, initialize the page action for all tabs.
+Calls initializePageAction upon completion of page load for
+imgur.com/a/* urls.
 */
-var gettingAllTabs = browser.tabs.query({});
-gettingAllTabs.then((tabs) => {
-  for (tab of tabs) {
-    initializePageAction(tab);
-  }
-});
-
-/*
-Each time a tab is updated, reset the page action for that tab.
-*/
-browser.tabs.onUpdated.addListener((id, changeInfo, tab) => {
-  initializePageAction(tab);
-});
+browser.webRequest.onCompleted.addListener(
+  initializePageAction,
+  {urls: [target]}
+);
 
 /*
 Toggle CSS when the page action is clicked.
