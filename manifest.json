@@ -7,7 +7,7 @@
   "permissions": ["activeTab", "tabs", "webRequest"],
 
   "background": {
-    "scripts": ["unfix-next-post.js"]
+    "scripts": ["hide-post-header.js"]
   },
 
   "page_action": {
