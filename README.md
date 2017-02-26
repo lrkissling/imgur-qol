@@ -1,5 +1,5 @@
-A simple Web Extension to improve the UI of an imgur album page.
+A simple WebExtension to improve the UI of an imgur page.
 
-Created for the purpose of learning Web Extensions, this extension currently only hides the floating album header that partially obscures images when scrolling through an album.
+Created for the purpose of learning WebExtensions, this extension currently only hides the floating header that partially obscures images when scrolling.
 
 Created by Lowell Kissling
