@@ -1,4 +1,4 @@
-A simple WebExtension to improve the UI of an imgur page.
+A simple WebExtension to improve the Quality-of-Life of an imgur page.
 
 Created for the purpose of learning WebExtensions, this extension does
 the following:
