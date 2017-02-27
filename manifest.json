@@ -1,13 +1,24 @@
 {
-  "description": "Hides the post header on imgur pictures and albums when scrolling.",
+  "description": "Provides some simple quality-of-life enhancements to imgur.",
   "manifest_version": 2,
-  "name": "modify-imgur-album",
+  "name": "imgur QOL",
   "version": "1.0",
 
-  "permissions": ["*://imgur.com/*", "tabs", "webRequest"],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://imgur.com/a/*",
+        "*://imgur.com/gallery/*",
+        "*://www.imgur.com/a/*",
+        "*://www.imgur.com/gallery/*"
+      ],
+      "js": ["load-all-images.js"]
+    },
 
-  "background": {
-    "scripts": ["hide-post-header.js"]
-  }
+    {
+      "matches": ["*://imgur.com/*", "*://www.imgur.com/*"],
+      "css": ["imgur-qol.css"]
+    }
+  ]
 
 }
