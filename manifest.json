@@ -4,6 +4,13 @@
   "name": "imgur QOL",
   "version": "1.0",
 
+  "applications": {
+    "gecko": {
+      "id": "lrkissling@gmail.com",
+      "strict_min_version": "53.0"
+    }
+  },
+
   "content_scripts": [
     {
       "matches": [
@@ -13,12 +20,17 @@
         "*://www.imgur.com/gallery/*"
       ],
       "js": ["load-all-images.js"]
-    },
-
-    {
-      "matches": ["*://imgur.com/*", "*://www.imgur.com/*"],
-      "css": ["imgur-qol.css"]
     }
-  ]
+  ],
+
+  "options_ui": {
+    "page": "options.html"
+  },
+
+  "permissions": ["*://imgur.com/*", "storage", "tabs", "webRequest"],
+
+  "background": {
+    "scripts": ["background.js"]
+  }
 
 }
